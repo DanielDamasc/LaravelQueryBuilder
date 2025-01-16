@@ -11,12 +11,16 @@ class MainController extends Controller
 {
     public function index(){
 
-        // UPDATE - update a client data
+        // DELETE - hard delete a client
         DB::table('clients')
-        ->where('id', 1)
+        ->where('id', 10)
+        ->delete();
+
+        // DELETE - soft delete a client
+        DB::table('clients')
+        ->where('id', 11)
         ->update([
-            'client_name' => 'ALTERADO',
-            'email' => 'ALTERADO@gmail.com'
+            'deleted_at' => Carbon::now()
         ]);
         
     }

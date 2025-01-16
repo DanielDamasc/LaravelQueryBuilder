@@ -11,27 +11,14 @@ class MainController extends Controller
 {
     public function index(){
 
-        // INSERT - add client
-        $new_client = [
-            'client_name' => 'Daniel Damasceno',
-            'email' => 'dan@gmail.com'
-        ];
-        DB::table('clients')->insert($new_client);
-
-        // INSERT - add multiple clients
+        // UPDATE - update a client data
         DB::table('clients')
-            ->insert([
-                [
-                    'client_name' => 'Cliente 1',
-                    'email' => 'cliente1@gmail.com',
-                    'created_at' => Carbon::now()
-                ],
-                [
-                    'client_name' => 'Cliente 2',
-                    'email' => 'cliente2@gmail.com',
-                    'created_at' => Carbon::now()
-                ]
-            ]);
+        ->where('id', 1)
+        ->update([
+            'client_name' => 'ALTERADO',
+            'email' => 'ALTERADO@gmail.com'
+        ]);
+        
     }
 
     private function showRawData($data)

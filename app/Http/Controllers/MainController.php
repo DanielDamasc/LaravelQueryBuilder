@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -9,14 +10,28 @@ use Illuminate\Support\Facades\DB;
 class MainController extends Controller
 {
     public function index(){
-        
-        // tests
-        $products = DB::table('products')
-                        ->whereIn('id', [1,3,5])
-                        ->get();
 
-        // $this->showRawData($results);
-        $this->showDataTable($products);
+        // INSERT - add client
+        $new_client = [
+            'client_name' => 'Daniel Damasceno',
+            'email' => 'dan@gmail.com'
+        ];
+        DB::table('clients')->insert($new_client);
+
+        // INSERT - add multiple clients
+        DB::table('clients')
+            ->insert([
+                [
+                    'client_name' => 'Cliente 1',
+                    'email' => 'cliente1@gmail.com',
+                    'created_at' => Carbon::now()
+                ],
+                [
+                    'client_name' => 'Cliente 2',
+                    'email' => 'cliente2@gmail.com',
+                    'created_at' => Carbon::now()
+                ]
+            ]);
     }
 
     private function showRawData($data)
